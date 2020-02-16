@@ -1,25 +1,19 @@
 package com.p2lem8dev.esssplash.photos
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.*
 
 interface PhotosApi {
 
-    fun loadPage(
-        page: Int,
-        perPage: Int,
-        orderBy: OrderBy,
-        clientId: String
+    @GET("/photos")
+    suspend fun loadPage(
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+        @Query("order_by") orderBy: String,
+        @Query("client_id") clientId: String
     ): List<Photo>
-
-    enum class OrderBy {
-        @SerializedName("latest")
-        Latest,
-        @SerializedName("popular")
-        Popular,
-        @SerializedName("oldest")
-        Oldest
-    }
 
     class Photo(
         val id: String,
@@ -65,11 +59,11 @@ interface PhotosApi {
         @SerializedName("updated_at")
         val updated: Date,
         val username: String,
-        val name: String,
+        val name: String?,
         @SerializedName("first_name")
-        val firstName: String,
+        val firstName: String?,
         @SerializedName("last_name")
-        val lastName: String,
+        val lastName: String?,
         @SerializedName("twitter_username")
         val twitterUsername: String?,
         @SerializedName("portfolio_url")
@@ -77,7 +71,8 @@ interface PhotosApi {
         val bio: String?,
         val location: String?,
         val links: Links,
-        val profileImage: ProfileImage,
+        @SerializedName("profile_image")
+        val profileImage: ProfileImage?,
         @SerializedName("instagram_username")
         val instagram: String?,
         val totalCollections: Int,

@@ -1,26 +1,23 @@
 package com.p2lem8dev.esssplash.photos
 
+import android.graphics.Color
 import com.p2lem8dev.esssplash.app.Constants
 import com.p2lem8dev.esssplash.photos.models.Photo
 import com.p2lem8dev.esssplash.photos.models.User
 
 class PhotosRepositoryImpl(private val api: PhotosApi) : PhotosRepository {
 
-    override fun getPhotos(page: Int, orderBy: PhotosRepository.OrderBy): List<Photo> {
+    override suspend fun getPhotos(page: Int, orderBy: PhotosRepository.OrderBy): List<Photo> {
         val photos = api.loadPage(
             page = page,
             perPage = Constants.PHOTOS_PER_PAGE,
-            orderBy = when (orderBy) {
-                PhotosRepository.OrderBy.Popular -> PhotosApi.OrderBy.Popular
-                PhotosRepository.OrderBy.Latest -> PhotosApi.OrderBy.Latest
-                PhotosRepository.OrderBy.Oldest -> PhotosApi.OrderBy.Oldest
-            },
+            orderBy = orderBy.key,
             clientId = Constants.ACCESS_KEY
         )
         return photos.map {
             Photo(
                 id = it.id,
-                color = it.color,
+                color = Color.parseColor(it.color),
                 description = it.description,
                 categories = it.categories,
                 created = it.created,
@@ -63,11 +60,13 @@ class PhotosRepositoryImpl(private val api: PhotosApi) : PhotosRepository {
                     location = it.user.location,
                     name = it.user.name,
                     portfolio = it.user.portfolio,
-                    profileImage = User.ProfileImage(
-                        small = it.user.profileImage.small,
-                        medium = it.user.profileImage.medium,
-                        large = it.user.profileImage.large
-                    ),
+                    profileImage = it.user.profileImage?.let {
+                        User.ProfileImage(
+                            small = it.small,
+                            medium = it.medium,
+                            large = it.large
+                        )
+                    },
                     totalCollections = it.user.totalCollections,
                     totalLikes = it.user.totalLikes,
                     totalPhotos = it.user.totalPhotos,

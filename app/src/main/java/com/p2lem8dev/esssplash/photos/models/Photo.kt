@@ -8,7 +8,7 @@ class Photo(
     val updated: Date,
     val width: Int,
     val height: Int,
-    val color: String,
+    val color: Int,
     val description: String?,
     val description2: String?,
     val urls: Urls,
@@ -19,7 +19,7 @@ class Photo(
     val currentUserCollections: List<String>,
     val user: User
 ) {
-    class Urls(
+    data class Urls(
         val raw: String?,
         val full: String?,
         val regular: String?,
@@ -27,7 +27,7 @@ class Photo(
         val thumb: String?
     )
 
-    class Links(
+    data class Links(
         val self: String,
         val html: String,
         val download: String,
