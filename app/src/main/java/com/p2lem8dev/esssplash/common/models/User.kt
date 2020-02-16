@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.photos.models
+package com.p2lem8dev.esssplash.common.models
 
 import java.util.*
 

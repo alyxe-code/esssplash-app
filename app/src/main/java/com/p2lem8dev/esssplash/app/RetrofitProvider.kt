@@ -2,6 +2,7 @@ package com.p2lem8dev.esssplash.app
 
 import com.google.gson.GsonBuilder
 import com.p2lem8dev.esssplash.photos.PhotosApi
+import com.p2lem8dev.esssplash.search.SearchApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,6 +17,7 @@ class RetrofitProvider(private val isDebuggable: Boolean) {
             .let(GsonConverterFactory::create)
     }
 
+    @Suppress("SameParameterValue")
     private fun constructRetrofit(url: String) = Retrofit.Builder()
         .baseUrl(url)
         .client(constructHttp())
@@ -34,4 +36,5 @@ class RetrofitProvider(private val isDebuggable: Boolean) {
     private val common by lazy { constructRetrofit(Constants.NETWORK_URL_COMMON) }
 
     fun homeApi() = common.create(PhotosApi::class.java)
+    fun searchApi() = common.create(SearchApi::class.java)
 }

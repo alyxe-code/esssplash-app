@@ -2,8 +2,8 @@ package com.p2lem8dev.esssplash.photos
 
 import android.graphics.Color
 import com.p2lem8dev.esssplash.app.Constants
-import com.p2lem8dev.esssplash.photos.models.Photo
-import com.p2lem8dev.esssplash.photos.models.User
+import com.p2lem8dev.esssplash.common.models.Photo
+import com.p2lem8dev.esssplash.common.models.User
 
 class PhotosRepositoryImpl(private val api: PhotosApi) : PhotosRepository {
 

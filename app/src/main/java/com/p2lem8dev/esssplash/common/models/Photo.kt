@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.photos.models
+package com.p2lem8dev.esssplash.common.models
 
 import java.util.*
 
@@ -8,7 +8,7 @@ class Photo(
     val updated: Date,
     val width: Int,
     val height: Int,
-    val color: Int,
+    val color: String,
     val description: String?,
     val description2: String?,
     val urls: Urls,

@@ -1,7 +1,7 @@
 package com.p2lem8dev.esssplash.photos
 
 import android.graphics.Color
-import com.p2lem8dev.esssplash.photos.models.Photo
+import com.p2lem8dev.esssplash.common.models.Photo
 
 class PhotosSubViewModel(
     private val parentViewModel: PhotosViewModel,
@@ -9,7 +9,7 @@ class PhotosSubViewModel(
 ) {
 
     val imageUrl = photo?.urls?.regular
-    val placeholderColor = photo?.color ?: Color.WHITE
+    val placeholderColor = photo?.color?.let(Color::parseColor) ?: Color.WHITE
 
     fun areContentsTheSame(other: PhotosSubViewModel): Boolean {
         return photo?.description == other.photo?.description
