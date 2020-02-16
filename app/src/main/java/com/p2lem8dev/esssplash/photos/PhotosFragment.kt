@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.home
+package com.p2lem8dev.esssplash.photos
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
 import com.p2lem8dev.esssplash.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class PhotosFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels {
-        ViewModelFactory { HomeViewModel(App.appComponent.home()) }
+    private val viewModel: PhotosViewModel by viewModels {
+        ViewModelFactory { PhotosViewModel(App.appComponent.home()) }
     }
 
     private lateinit var binding: FragmentHomeBinding

@@ -1,8 +1,8 @@
 package com.p2lem8dev.esssplash.app
 
 import android.app.Application
-import com.p2lem8dev.esssplash.home.HomeModule
-import com.p2lem8dev.esssplash.home.HomeRepository
+import com.p2lem8dev.esssplash.photos.PhotosModule
+import com.p2lem8dev.esssplash.photos.PhotosRepository
 import dagger.Component
 
 @Component(
@@ -12,9 +12,9 @@ import dagger.Component
     ],
     modules = [
         AppModule::class,
-        HomeModule::class
+        PhotosModule::class
     ]
 )
 interface AppComponent {
-    fun home(): HomeRepository
+    fun home(): PhotosRepository
 }
