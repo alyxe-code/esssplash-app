@@ -6,5 +6,5 @@ import dagger.Provides
 @Module
 class HomeModule {
     @Provides
-    fun homeRepository(): HomeRepository = HomeRepositoryImpl()
+    fun homeRepository(api: HomeApi): HomeRepository = HomeRepositoryImpl(api)
 }

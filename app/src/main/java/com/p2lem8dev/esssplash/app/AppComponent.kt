@@ -1,14 +1,14 @@
+package com.p2lem8dev.esssplash.app
+
 import android.app.Application
-import com.p2lem8dev.esssplash.app.AppModule
 import com.p2lem8dev.esssplash.home.HomeModule
 import com.p2lem8dev.esssplash.home.HomeRepository
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
 @Component(
     dependencies = [
-        Application::class
+        Application::class,
+        RetrofitProvider::class
     ],
     modules = [
         AppModule::class,
@@ -16,5 +16,5 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
-    fun homeRepository(): HomeRepository
+    fun home(): HomeRepository
 }
