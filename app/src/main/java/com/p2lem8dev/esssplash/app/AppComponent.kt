@@ -1,24 +1,19 @@
 package com.p2lem8dev.esssplash.app
 
 import android.app.Application
-import com.p2lem8dev.esssplash.photos.PhotosModule
-import com.p2lem8dev.esssplash.photos.PhotosRepository
-import com.p2lem8dev.esssplash.search.SearchModule
-import com.p2lem8dev.esssplash.search.SearchRepository
+import com.p2lem8dev.unsplashapi.UnsplashModule
+import com.p2lem8dev.unsplashapi.repository.PhotosRepository
 import dagger.Component
 
 @Component(
     dependencies = [
-        Application::class,
-        RetrofitProvider::class
+        Application::class
     ],
     modules = [
         AppModule::class,
-        PhotosModule::class,
-        SearchModule::class
+        UnsplashModule::class
     ]
 )
 interface AppComponent {
-    fun home(): PhotosRepository
-    fun search(): SearchRepository
+    fun photos(): PhotosRepository
 }

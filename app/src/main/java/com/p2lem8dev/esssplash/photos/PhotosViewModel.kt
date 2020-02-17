@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigation
+import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigationImplementation
+import com.p2lem8dev.unsplashapi.repository.PhotosRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -17,8 +20,12 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         }
     val parts: LiveData<List<PhotosSubViewModel>> = MutableLiveData<List<PhotosSubViewModel>>()
 
+    private val _navigation =
+        LiveNavigationImplementation<Navigation>()
+    val navigation: LiveNavigation<Navigation> = _navigation
+
     private var currentPage = -1
-    private var loadingOrder = PhotosRepository.OrderBy.Latest
+    private var loadingOrder = PhotosRepository.ListOrderBy.Latest
 
     init {
         loadNext()
@@ -28,7 +35,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val page = currentPage + 1
             val photos = try {
-                repository.getPhotos(page, loadingOrder)
+                repository.listPhotos(page, 10, loadingOrder)
             } catch (t: Throwable) {
                 null
             }
@@ -46,5 +53,11 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
 
             currentPage = page
         }
+    }
+
+    fun onImageClicked(imageId: String) = _navigation.call { viewImage(imageId) }
+
+    interface Navigation {
+        fun viewImage(imageId: String)
     }
 }

@@ -1,7 +1,7 @@
 package com.p2lem8dev.esssplash.app
 
 import android.app.Application
-import com.p2lem8dev.esssplash.BuildConfig
+import com.p2lem8dev.unsplashapi.UnsplashModule
 
 class App : Application() {
 
@@ -13,14 +13,12 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val isDebuggable = BuildConfig.DEBUG
-
-        val retrofit = RetrofitProvider(isDebuggable)
+        val unsplashModule = UnsplashModule(Constants.ACCESS_KEY, Constants.SECRET_KEY)
 
         appComponent = DaggerAppComponent
             .builder()
             .application(this)
-            .retrofitProvider(retrofit)
+            .unsplashModule(unsplashModule)
             .build()
     }
 }

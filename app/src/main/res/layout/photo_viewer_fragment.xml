@@ -6,78 +6,193 @@
 
         <variable
             name="viewModel"
-            type="com.p2lem8dev.esssplash.photoviewer.PhotoViewerViewModel" />
+            type="com.p2lem8dev.esssplash.photos.viewer.PhotosViewerViewModel" />
+
+        <import
+            alias="viewUtil"
+            type="com.p2lem8dev.esssplash.photos.viewer.PhotosViewerViewUtil" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/photo"
+            image_color="@{ viewModel.properties.mainImageColor }"
+            image_url="@{ viewModel.properties.mainImage }"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="100dp"
-            android:background="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="#444" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/profileImage"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:background="#323233"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photo" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/authorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/photos"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/profileImage"
-            app:layout_constraintStart_toEndOf="@id/profileImage"
-            app:layout_constraintTop_toTopOf="@id/profileImage"
-            tools:text="Harley-Davidson" />
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:lines="2"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shape_image_viewer_panel"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileImage"
-            tools:text="@tools:sample/lorem/random" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/favorite"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_baseline_favorite_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/photo" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profileImage"
+                image_url_avatar="@{ viewModel.properties.profileImage }"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:layout_constraintBottom_toBottomOf="@id/profileUsername"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/profileName"
+                tools:background="@tools:sample/avatars" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/collect"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_baseline_add_24"
-            app:layout_constraintBottom_toBottomOf="@+id/favorite"
-            app:layout_constraintEnd_toStartOf="@+id/favorite"
-            app:layout_constraintTop_toTopOf="@+id/favorite" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/profileName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="start|center_vertical"
+                android:text="@{ viewModel.properties.fullName }"
+                android:textColor="#333"
+                app:layout_constraintBottom_toTopOf="@id/profileUsername"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/profileImage"
+                tools:text="@tools:sample/full_names" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/profileUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="start|center_vertical"
+                android:text="@{ `@` + viewModel.properties.username }"
+                android:textColor="#888"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/profileImage"
+                tools:text="@tools:sample/full_names" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/profileImage"-->
+        <!--            image_url_avatar="@{ viewModel.properties.profileImage }"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/mainImage"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:src="@tools:sample/avatars" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/fullName"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginTop="2dp"-->
+        <!--            android:text="@{ viewModel.properties.fullName }"-->
+        <!--            android:textColor="#000000"-->
+        <!--            android:textSize="14sp"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/profileImage"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/profileImage"-->
+        <!--            tools:text="@tools:sample/full_names" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/username"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:text="@{ viewUtil.username(viewModel.properties, context) }"-->
+        <!--            android:textSize="12sp"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/profileImage"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/fullName"-->
+        <!--            tools:text="@tools:sample/first_names" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/mainImage"-->
+        <!--            image_color="@{ viewModel.properties.mainImageColor }"-->
+        <!--            image_url="@{ viewModel.properties.mainImage }"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:contentDescription="@{ viewModel.properties.description }"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/favorite"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/profileImage" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/favorite"-->
+        <!--            android:layout_width="24dp"-->
+        <!--            android:layout_height="24dp"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/ic_baseline_favorite_24"-->
+        <!--            android:onClick="@{ _ -> viewModel.onClickFavorite() }"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/description"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/collect"-->
+        <!--            android:layout_width="24dp"-->
+        <!--            android:layout_height="24dp"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/ic_baseline_bookmark_border_24"-->
+        <!--            android:onClick="@{ _ -> viewModel.onClickCollect() }"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/description"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/favorite" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/share"-->
+        <!--            android:layout_width="24dp"-->
+        <!--            android:layout_height="24dp"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/ic_baseline_share_24"-->
+        <!--            android:onClick="@{ _ -> viewModel.onClickShare() }"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/description"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/collect" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:layout_width="24dp"-->
+        <!--            android:layout_height="24dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/ic_baseline_download_24"-->
+        <!--            android:onClick="@{ _ -> viewModel.onClickDownload() }"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/description"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/description"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:ellipsize="end"-->
+        <!--            android:maxLines="3"-->
+        <!--            android:text="@{ viewModel.properties.description }"-->
+        <!--            android:textColor="#000000"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            tools:text="@tools:sample/lorem/random"-->
+        <!--            tools:visibility="@{ viewModel.properties.description != null ? View.VISIBLE : View.GONE }" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

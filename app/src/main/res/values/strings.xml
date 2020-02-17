@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Esssplash</string>
     <string name="photos">Photos</string>
+    <string name="photos_viewer">Photos Viewer</string>
     <string name="hint_search">Search</string>
+    <string name="rated_collections">Rated collections</string>
+    <string name="search">Search</string>
+    <string name="username">\@%s</string>
 </resources>
