@@ -3,28 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentPhotos">
+    app:startDestination="@id/fragmentPhotos"
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/fragmentPhotos"
         android:name="com.p2lem8dev.esssplash.photos.PhotosFragment"
         android:label="@string/photos"
-        tools:layout="@layout/fragment_photos">
-        <action
-            android:id="@+id/fragmentPhotos_to_fragmentPhotosViewer"
-            app:destination="@id/fragmentPhotosViewer"
-            app:popUpTo="@id/fragmentPhotos" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/fragmentPhotosViewer"
-        android:name="com.p2lem8dev.esssplash.photos.viewer.PhotosViewerFragment"
-        android:label="@string/photos_viewer"
-        tools:layout="@layout/photo_viewer_fragment">
-        <argument
-            android:name="photoId"
-            app:argType="string"
-            app:nullable="false" />
-    </fragment>
+        tools:layout="@layout/fragment_photos" />
 
 </navigation>

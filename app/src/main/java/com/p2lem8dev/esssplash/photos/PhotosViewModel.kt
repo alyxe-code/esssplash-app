@@ -20,8 +20,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         }
     val parts: LiveData<List<PhotosSubViewModel>> = MutableLiveData<List<PhotosSubViewModel>>()
 
-    private val _navigation =
-        LiveNavigationImplementation<Navigation>()
+    private val _navigation = LiveNavigationImplementation<Navigation>()
     val navigation: LiveNavigation<Navigation> = _navigation
 
     private var currentPage = -1
@@ -55,9 +54,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         }
     }
 
-    fun onImageClicked(imageId: String) = _navigation.call { viewImage(imageId) }
+    fun onImageClicked(imageId: String) = Unit
 
-    interface Navigation {
-        fun viewImage(imageId: String)
-    }
+    interface Navigation
 }

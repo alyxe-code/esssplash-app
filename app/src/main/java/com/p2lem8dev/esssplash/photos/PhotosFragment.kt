@@ -66,9 +66,4 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
         list ?: return
         adapter.submitList(list)
     }
-
-    override fun viewImage(imageId: String) {
-        val target = PhotosFragmentDirections.fragmentPhotosToFragmentPhotosViewer(imageId)
-        findNavController().navigate(target)
-    }
 }
