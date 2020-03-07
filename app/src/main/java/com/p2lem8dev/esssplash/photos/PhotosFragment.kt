@@ -1,19 +1,26 @@
 package com.p2lem8dev.esssplash.photos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
 import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
+import com.p2lem8dev.esssplash.common.list.LoadingCell
+import com.p2lem8dev.esssplash.common.list.StaticListAdapter
 import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
+import com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 
+@ExperimentalCoroutinesApi
+@InternalCoroutinesApi
 class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
 
     private val viewModel: PhotosViewModel by viewModels {
@@ -21,7 +28,7 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
     }
 
     private lateinit var binding: FragmentPhotosBinding
-    private lateinit var adapter: PhotosListAdapter
+    private lateinit var adapter: StaticListAdapter<ViewDataBinding>
 
 
     override fun onCreateView(
@@ -39,31 +46,32 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        adapter = PhotosListAdapter(viewLifecycleOwner)
-        adapter.state.observe(viewLifecycleOwner, this::onAdapterStateChanged)
-        binding.recycler.let {
-            it.adapter = adapter
-            it.layoutManager = GridLayoutManager(
-                binding.recycler.context,
-                1,
-                GridLayoutManager.HORIZONTAL,
-                false
-            )
-            PagerSnapHelper()
-                .attachToRecyclerView(binding.recycler)
-        }
+        adapter = StaticListAdapter(emptyList(), viewLifecycleOwner)
+        binding.recycler.adapter = adapter
 
         viewModel.parts.observe(viewLifecycleOwner, this::updatePhotosList)
         viewModel.navigation.observe(viewLifecycleOwner, this)
     }
 
-    private fun onAdapterStateChanged(state: PhotosListAdapter.State) = when (state) {
-        PhotosListAdapter.State.ItemAtStartLoaded -> Unit
-        PhotosListAdapter.State.ItemAtEndLoaded -> viewModel.loadNext()
-    }
-
     private fun updatePhotosList(list: List<PhotosSubViewModel>?) {
         list ?: return
-        adapter.submitList(list)
+        val newList = list.map(::PhotosCell) + LoadingCell()
+        adapter.submitList(newList)
     }
+
+    private var optionsFragment: Fragment? = null
+    override fun displayOptions(photoId: String) = childFragmentManager.commit {
+        val fragment = PhotosOptionsFragment.newInstance(photoId, this@PhotosFragment::hideOptions)
+        optionsFragment = fragment
+        replace(binding.options.id, fragment)
+    }
+
+    private fun hideOptions() = childFragmentManager.commit {
+        Log.d("PHOTOS_OPTIONS", "Closing...")
+        val fragment = optionsFragment ?: return@commit
+        remove(fragment)
+        optionsFragment = null
+    }
+
+    override fun displayPhoto(photoId: String) = TODO("Not implemented")
 }

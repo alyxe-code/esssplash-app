@@ -6,12 +6,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigation
-import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigationImplementation
+import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigationCoroutineImplementation
 import com.p2lem8dev.unsplashapi.repository.PhotosRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 
-class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
+@ExperimentalCoroutinesApi
+@InternalCoroutinesApi
+class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
+    PhotosSubViewModel.Navigation {
 
     private var _parts = mutableListOf<PhotosSubViewModel>()
         private set(value) {
@@ -20,7 +25,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         }
     val parts: LiveData<List<PhotosSubViewModel>> = MutableLiveData<List<PhotosSubViewModel>>()
 
-    private val _navigation = LiveNavigationImplementation<Navigation>()
+    private val _navigation = LiveNavigationCoroutineImplementation<Navigation>()
     val navigation: LiveNavigation<Navigation> = _navigation
 
     private var currentPage = -1
@@ -30,7 +35,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         loadNext()
     }
 
-    fun loadNext() {
+    private fun loadNext() {
         viewModelScope.launch(Dispatchers.IO) {
             val page = currentPage + 1
             val photos = try {
@@ -54,7 +59,14 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel() {
         }
     }
 
-    fun onImageClicked(imageId: String) = Unit
+    override fun onItemClicked(photoId: String) =
+        _navigation.call { displayPhoto(photoId) }
 
-    interface Navigation
+    override fun onItemOptionsClicked(photoId: String) =
+        _navigation.call { displayOptions(photoId) }
+
+    interface Navigation {
+        fun displayOptions(photoId: String)
+        fun displayPhoto(photoId: String)
+    }
 }

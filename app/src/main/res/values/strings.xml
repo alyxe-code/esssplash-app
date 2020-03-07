@@ -6,4 +6,7 @@
     <string name="rated_collections">Rated collections</string>
     <string name="search">Search</string>
     <string name="username">\@%s</string>
+    <string name="photos_options_copy_link">Copy Link</string>
+    <string name="photos_options_share_to">Share to…</string>
+    <string name="photos_options_hide">Hide photo</string>
 </resources>

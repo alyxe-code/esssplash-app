@@ -32,11 +32,14 @@ android {
     }
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':UnsplashApi')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'androidx.core:core-ktx:1.2.0'
@@ -48,12 +51,11 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    implementation project(path: ':UnsplashApi')
 
     def paging_version = "2.1.1"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
-    def navigation_ktx = '2.2.1'
+    def navigation_ktx = '2.3.0-alpha02'
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_ktx"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_ktx"
 
@@ -63,7 +65,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    def nav_version = "2.3.0-alpha01"
+    def nav_version = '2.3.0-alpha03'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 

@@ -1,12 +1,9 @@
 package com.p2lem8dev.esssplash.photos
 
-import android.graphics.Color
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.p2lem8dev.unsplashapi.models.Photo
 
 class PhotosSubViewModel(
-    private val parentViewModel: PhotosViewModel,
+    private val parentViewModel: Navigation,
     private val photo: Photo
 ) {
     val username = photo.user.username
@@ -15,16 +12,12 @@ class PhotosSubViewModel(
     val profileImage = photo.user.profileImage.medium
     val imageUrl = photo.urls.regular
 
-    private var _favorite = false
-        set(value) {
-            field = value
-            (favorite as MutableLiveData).postValue(value)
-        }
-    val favorite: LiveData<Boolean> = MutableLiveData(_favorite)
+    fun onClick() = parentViewModel.onItemClicked(photo.id)
 
-    fun onClick() = parentViewModel.onImageClicked(photo.id)
+    fun onOptionsClicked() = parentViewModel.onItemOptionsClicked(photo.id)
 
-    fun onClickFavorite() {
-        _favorite = !_favorite
+    interface Navigation {
+        fun onItemClicked(photoId: String)
+        fun onItemOptionsClicked(photoId: String)
     }
 }
