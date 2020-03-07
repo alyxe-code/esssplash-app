@@ -6,9 +6,10 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.p2lem8dev.esssplash.R
+import com.p2lem8dev.esssplash.common.ExceptionHandler
 import com.p2lem8dev.esssplash.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ExceptionHandler {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,4 +35,6 @@ class MainActivity : AppCompatActivity() {
         if (!isSystemUIHidden)
             setSystemUIVisibility(true)
     }
+
+    override fun onException(exception: Exception): Boolean = false
 }

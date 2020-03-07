@@ -1,3 +1,15 @@
 <resources>
-    <dimen name="card_image_height">300dp</dimen>
+    <dimen name="image_height_default">300dp</dimen>
+    <dimen name="options_width_default">256dp</dimen>
+
+    <dimen name="offset_none">0dp</dimen>
+    <dimen name="offset_4">4dp</dimen>
+    <dimen name="offset_8">8dp</dimen>
+    <dimen name="offset_12">12dp</dimen>
+    <dimen name="offset_16">16dp</dimen>
+    <dimen name="offset_20">20dp</dimen>
+    <dimen name="offset_24">24dp</dimen>
+    <dimen name="offset_28">28dp</dimen>
+    <dimen name="offset_32">32dp</dimen>
+    <dimen name="offset_36">36dp</dimen>
 </resources>

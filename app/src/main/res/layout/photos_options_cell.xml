@@ -3,9 +3,9 @@
     android:id="@+id/text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
+    android:background="?attr/color_background"
     android:ellipsize="end"
     android:lines="1"
-    android:paddingHorizontal="12dp"
-    android:paddingVertical="8dp"
+    android:paddingHorizontal="@dimen/offset_12"
+    android:paddingVertical="@dimen/offset_8"
     tools:text="@tools:sample/lorem/random" />
