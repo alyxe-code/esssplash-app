@@ -16,6 +16,8 @@ interface PhotosRepository {
 
     suspend fun getTrackableDownloadLink(id: String): String
 
+    suspend fun toggleLike(id: String): Boolean
+
     suspend fun likePhoto(id: String)
 
     suspend fun unlikePhoto(id: String)

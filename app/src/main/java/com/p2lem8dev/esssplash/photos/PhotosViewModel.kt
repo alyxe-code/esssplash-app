@@ -8,22 +8,19 @@ import androidx.lifecycle.viewModelScope
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigation
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigationCoroutineImplementation
 import com.p2lem8dev.unsplashapi.repository.PhotosRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
 class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
     PhotosSubViewModel.Navigation {
 
-    private var _parts = mutableListOf<PhotosSubViewModel>()
+    private var _photos = mutableListOf<PhotosSubViewModel>()
         private set(value) {
             field = value
-            (parts as MutableLiveData).postValue(value)
+            (photos as MutableLiveData).postValue(value)
         }
-    val parts: LiveData<List<PhotosSubViewModel>> = MutableLiveData<List<PhotosSubViewModel>>()
+    val photos: LiveData<List<PhotosSubViewModel>> = MutableLiveData<List<PhotosSubViewModel>>()
 
     private val _navigation = LiveNavigationCoroutineImplementation<Navigation>()
     val navigation: LiveNavigation<Navigation> = _navigation
@@ -53,7 +50,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
                     photo
                 )
             }
-            _parts = (_parts + newList) as MutableList<PhotosSubViewModel>
+            _photos = (_photos + newList) as MutableList<PhotosSubViewModel>
 
             currentPage = page
         }
@@ -65,8 +62,23 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
     override fun onItemOptionsClicked(photoId: String) =
         _navigation.call { displayOptions(photoId) }
 
+    private var toggleLikeJob: Job? = null
+    override fun onItemLikeClicked(photoId: String) {
+        toggleLikeJob?.let { if (it.isActive) it.cancel() }
+
+        val photo = _photos.firstOrNull { it.photo.id == photoId } ?: return
+        toggleLikeJob = viewModelScope.launch(Dispatchers.Default) {
+            val isLiked = repository.toggleLike(photoId)
+            photo.likedByUser = isLiked
+        }
+    }
+
+    override fun onItemCollectClicked(photoId: String) =
+        _navigation.call { displayAddToCollection(photoId) }
+
     interface Navigation {
         fun displayOptions(photoId: String)
         fun displayPhoto(photoId: String)
+        fun displayAddToCollection(photoId: String)
     }
 }

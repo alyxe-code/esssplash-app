@@ -49,7 +49,7 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
         adapter = StaticListAdapter(emptyList(), viewLifecycleOwner)
         binding.recycler.adapter = adapter
 
-        viewModel.parts.observe(viewLifecycleOwner, this::updatePhotosList)
+        viewModel.photos.observe(viewLifecycleOwner, this::updatePhotosList)
         viewModel.navigation.observe(viewLifecycleOwner, this)
     }
 
@@ -74,4 +74,8 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
     }
 
     override fun displayPhoto(photoId: String) = TODO("Not implemented")
+
+    override fun displayAddToCollection(photoId: String) {
+        TODO("Not yet implemented")
+    }
 }

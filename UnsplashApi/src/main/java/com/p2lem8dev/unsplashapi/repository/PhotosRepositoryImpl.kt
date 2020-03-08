@@ -37,4 +37,12 @@ internal class PhotosRepositoryImpl(
     override suspend fun unlikePhoto(id: String) {
         photosApi.unlikePhoto(id, appKey)
     }
+
+    /**
+     * Load current model and toggle state. Then return
+     * new state of the model
+     */
+    override suspend fun toggleLike(id: String): Boolean {
+        TODO("Not implemented")
+    }
 }

@@ -16,10 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_8"
-        android:layout_marginBottom="@dimen/offset_8"
         android:background="?attr/color_background"
-        android:onClick="@{ _ -> viewModel.onClick() }">
+        android:onClick="@{ _ -> viewModel.onClick() }"
+        android:paddingTop="@dimen/offset_8"
+        android:paddingBottom="@dimen/offset_8">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/profileImage"
@@ -90,6 +90,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileImage"
             tools:background="#f4f665" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginTop="@dimen/offset_12"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainImage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/likesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/like"
+            app:layout_constraintTop_toTopOf="like" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_bookmark_border_24"
+            app:layout_constraintBottom_toBottomOf="@id/like"
+            app:layout_constraintStart_toEndOf="@id/likesCount"
+            app:layout_constraintTop_toTopOf="@id/like" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
