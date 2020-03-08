@@ -16,10 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/color_background"
-        android:onClick="@{ _ -> viewModel.onClick() }"
-        android:paddingTop="@dimen/offset_8"
-        android:paddingBottom="@dimen/offset_8">
+        android:background="?attr/color_background">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/profileImage"
@@ -28,6 +25,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginTop="@dimen/offset_8"
             app:layout_constraintEnd_toStartOf="@id/names"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +39,7 @@
             android:layout_marginEnd="@dimen/offset_12"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@id/profileImage"
-            app:layout_constraintEnd_toStartOf="@id/open"
+            app:layout_constraintEnd_toStartOf="@id/openOptions"
             app:layout_constraintStart_toEndOf="@id/profileImage"
             app:layout_constraintTop_toTopOf="@id/profileImage">
 
@@ -65,7 +63,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/open"
+            android:id="@+id/openOptions"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="@dimen/offset_4"
@@ -76,6 +74,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/names" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{ _ -> viewModel.onUserClicked() }"
+            app:layout_constraintBottom_toTopOf="@id/mainImage"
+            app:layout_constraintEnd_toStartOf="@id/openOptions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/mainImage"
             image_url="@{ viewModel.imageUrl }"
@@ -85,6 +92,7 @@
             android:clickable="true"
             android:elevation="0dp"
             android:focusable="true"
+            android:onClick="@{ _ -> viewModel.onClick() }"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +105,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/offset_12"
             android:layout_marginTop="@dimen/offset_12"
+            android:layout_marginBottom="@dimen/offset_8"
+            android:onClick="@{ _ -> viewModel.onLikeClicked() }"
             android:src="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mainImage" />
 
@@ -114,6 +125,7 @@
             android:id="@+id/collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{ _ -> viewModel.onCollectClicked() }"
             android:src="@drawable/ic_baseline_bookmark_border_24"
             app:layout_constraintBottom_toBottomOf="@id/like"
             app:layout_constraintStart_toEndOf="@id/likesCount"

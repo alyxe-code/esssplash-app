@@ -9,11 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import com.p2lem8dev.esssplash.R
 import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
+import com.p2lem8dev.esssplash.common.*
 import com.p2lem8dev.esssplash.common.list.LoadingCell
 import com.p2lem8dev.esssplash.common.list.StaticListAdapter
-import com.p2lem8dev.esssplash.common.showException
 import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
 import com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -77,4 +78,14 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
     override fun displayAddToCollection(photoId: String): Unit = TODO("Not yet implemented")
 
     override fun displayException(exception: Exception) = showException(exception)
+
+    override fun displayHttpException(exception: Exception) {
+        val stringId = when (exception) {
+            NotAuthorizedException -> R.string.http_error_not_authorized
+            ResourceNotFound -> R.string.http_error_resource_not_found
+            ServerException -> R.string.http_error_server_exception
+            else -> R.string.error
+        }
+        showSnackbar(binding.root, getString(stringId))
+    }
 }

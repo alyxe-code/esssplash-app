@@ -43,6 +43,8 @@ class PhotosSubViewModel(
 
     fun onCollectClicked() = parentViewModel.onItemCollectClicked(id)
 
+    fun onUserClicked(): Unit = TODO("Not implemented")
+
     interface Navigation {
         fun onItemClicked(photoId: String)
         fun onItemOptionsClicked(photoId: String)

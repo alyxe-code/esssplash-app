@@ -5,10 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.p2lem8dev.esssplash.common.NotAuthorizedException
+import com.p2lem8dev.esssplash.common.ResourceNotFound
+import com.p2lem8dev.esssplash.common.ServerException
+import com.p2lem8dev.esssplash.common.UndefinedException
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigation
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigationCoroutineImplementation
 import com.p2lem8dev.unsplashapi.repository.PhotosRepository
 import kotlinx.coroutines.*
+import retrofit2.HttpException
 
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
@@ -78,6 +83,15 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
             } catch (e: CancellationException) {
                 Log.d(TAG, "Toggle like has been canceled")
                 null
+            } catch (e: HttpException) {
+                val exception = when (e.code()) {
+                    401 -> NotAuthorizedException
+                    404 -> ResourceNotFound
+                    500 -> ServerException
+                    else -> UndefinedException
+                }
+                _navigation.call { displayHttpException(exception) }
+                null
             } catch (e: Exception) {
                 _navigation.call { displayException(e) }
                 null
@@ -93,10 +107,12 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
         _navigation.call { displayAddToCollection(photoId) }
 
     interface Navigation {
-        fun displayException(exception: Exception)
         fun displayOptions(photoId: String)
         fun displayPhoto(photoId: String)
         fun displayAddToCollection(photoId: String)
+
+        fun displayException(exception: Exception)
+        fun displayHttpException(exception: Exception)
     }
 
     companion object {

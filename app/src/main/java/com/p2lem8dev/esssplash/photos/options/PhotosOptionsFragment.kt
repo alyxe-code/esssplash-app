@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.p2lem8dev.esssplash.R
+import com.p2lem8dev.esssplash.common.showSnackbar
 import com.p2lem8dev.esssplash.databinding.PhotosOptionsBinding
 
 class PhotosOptionsFragment : Fragment(), AdapterView.OnItemClickListener {
@@ -79,9 +79,7 @@ class PhotosOptionsFragment : Fragment(), AdapterView.OnItemClickListener {
         onCloseOptions()
     }
 
-    private fun show(message: String) {
-        Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
-    }
+    private fun show(message: String) = showSnackbar(binding.root, message)
 
     private fun copyLink() = show("Copy link!")
 

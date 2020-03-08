@@ -38,13 +38,13 @@ interface PhotosApi {
     @POST("photos/{id}/like")
     suspend fun likePhoto(
         @Path("id") id: String,
-        @Path("client_id") clientId: String
+        @Query("client_id") clientId: String
     ): LikePhotoResponse
 
     @DELETE("photos/{id}/like")
     suspend fun unlikePhoto(
         @Path("id") id: String,
-        @Path("client_id") clientId: String
+        @Query("client_id") clientId: String
     ): LikePhotoResponse
 
     class DownloadPhotoModel(val url: String)

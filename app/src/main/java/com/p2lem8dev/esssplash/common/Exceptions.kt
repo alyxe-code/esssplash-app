@@ -6,23 +6,22 @@ import androidx.fragment.app.Fragment
 
 
 object UndefinedException : Exception("Oops")
-
+object NotAuthorizedException : Exception()
+object ServerException : Exception()
+object ResourceNotFound : Exception()
 
 fun showException(view: View, exception: Exception?, tag: String? = null, log: Boolean = true) {
     exception ?: return
 
-    val log2 = when (exception) {
-        is UndefinedException -> {
-            showSnackbar(view, exception.message)
-            false
+    when (exception) {
+        NotAuthorizedException -> {
+            showSnackbar(view, "Not authorized")
         }
-        else -> true
+        else -> showSnackbar(view, exception.message)
     }
 
-    val printLog = log || log2
-
-    if (printLog) {
-        Log.d(
+    if (log) {
+        Log.e(
             tag ?: "EXCEPTION",
             "${exception.message}\n" + exception.stackTrace.joinToString("\n")
         )
@@ -32,17 +31,4 @@ fun showException(view: View, exception: Exception?, tag: String? = null, log: B
 fun Fragment.showException(exception: Exception?) {
     val view = view ?: return
     showException(view, exception)
-}
-
-interface ExceptionHandler {
-    fun onException(exception: Exception): Boolean
-
-}
-
-fun Fragment.handleExceptionOrShow(exception: Exception?) {
-    exception ?: return
-    val handled = (activity as? ExceptionHandler)?.onException(exception)
-    if (handled != true) {
-        showException(exception)
-    }
 }

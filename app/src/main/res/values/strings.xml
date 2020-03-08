@@ -9,4 +9,10 @@
     <string name="photos_options_copy_link">Copy Link</string>
     <string name="photos_options_share_to">Share to…</string>
     <string name="photos_options_hide">Hide photo</string>
+
+    <string name="http_error_not_authorized">Not authorized</string>
+    <string name="http_error_resource_not_found">Resource not found</string>
+    <string name="http_error_server_exception">Something gone wrong</string>
+
+    <string name="error">Error</string>
 </resources>
