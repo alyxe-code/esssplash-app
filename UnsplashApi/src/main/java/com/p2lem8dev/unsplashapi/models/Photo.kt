@@ -17,9 +17,9 @@ class Photo(
     override val urls: BasePhoto.Urls,
     val links: BasePhoto.Links,
     val categories: List<String>,
-    val likes: Int,
+    var likes: Int,
     @SerializedName("liked_by_user")
-    val likedByUser: Boolean,
+    var likedByUser: Boolean,
     @SerializedName("current_user_collections")
     val currentUserCollections: List<String>,
     val user: User,

@@ -33,7 +33,7 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
     }
 
     private fun loadNext() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             val page = currentPage + 1
             val photos = try {
                 repository.listPhotos(page, 10, loadingOrder)
@@ -41,14 +41,16 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
                 null
             }
 
-            Log.d("PHOTOS", "Loaded ${photos?.size ?: 0} photos")
+            Log.d(TAG, "Loaded ${photos?.size ?: 0} photos")
             photos ?: return@launch
 
-            val newList = photos.map { photo ->
-                PhotosSubViewModel(
-                    this@PhotosViewModel,
-                    photo
-                )
+            val newList = withContext(Dispatchers.Default) {
+                photos.map { photo ->
+                    PhotosSubViewModel(
+                        parentViewModel = this@PhotosViewModel,
+                        photo = photo
+                    )
+                }
             }
             _photos = (_photos + newList) as MutableList<PhotosSubViewModel>
 
@@ -63,13 +65,27 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
         _navigation.call { displayOptions(photoId) }
 
     private var toggleLikeJob: Job? = null
-    override fun onItemLikeClicked(photoId: String) {
+    override fun onItemLikeClicked(photoId: String, isLiked: Boolean) {
         toggleLikeJob?.let { if (it.isActive) it.cancel() }
 
-        val photo = _photos.firstOrNull { it.photo.id == photoId } ?: return
-        toggleLikeJob = viewModelScope.launch(Dispatchers.Default) {
-            val isLiked = repository.toggleLike(photoId)
-            photo.likedByUser = isLiked
+        val photo = _photos.firstOrNull { it.id == photoId } ?: return
+        viewModelScope.launch(Dispatchers.Default) {
+            val updatedPhoto = try {
+                if (isLiked)
+                    repository.unlikePhoto(photoId)
+                else
+                    repository.likePhoto(photoId)
+            } catch (e: CancellationException) {
+                Log.d(TAG, "Toggle like has been canceled")
+                null
+            } catch (e: Exception) {
+                _navigation.call { displayException(e) }
+                null
+            }
+
+            updatedPhoto ?: return@launch
+
+            photo.updateLikes(updatedPhoto.likedByUser, updatedPhoto.likes)
         }
     }
 
@@ -77,8 +93,13 @@ class PhotosViewModel(private val repository: PhotosRepository) : ViewModel(),
         _navigation.call { displayAddToCollection(photoId) }
 
     interface Navigation {
+        fun displayException(exception: Exception)
         fun displayOptions(photoId: String)
         fun displayPhoto(photoId: String)
         fun displayAddToCollection(photoId: String)
+    }
+
+    companion object {
+        private const val TAG = "PHOTOS"
     }
 }

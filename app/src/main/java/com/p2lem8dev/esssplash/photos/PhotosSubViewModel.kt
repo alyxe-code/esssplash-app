@@ -5,34 +5,48 @@ import androidx.lifecycle.MutableLiveData
 import com.p2lem8dev.unsplashapi.models.Photo
 
 class PhotosSubViewModel(
-    private val parentViewModel: Navigation,
-    val photo: Photo
+    photo: Photo,
+    private val parentViewModel: Navigation
 ) {
+    val id = photo.id
+
     val username = photo.user.username
     val name = photo.user.name
 
     val profileImage = photo.user.profileImage.medium
     val imageUrl = photo.urls.regular
 
-    var likedByUser = photo.likedByUser
-        set(value) {
+    private var _isLiked = photo.likedByUser
+        private set(value) {
             field = value
             (isLiked as MutableLiveData).postValue(value)
         }
-    val isLiked: LiveData<Boolean> = MutableLiveData(likedByUser)
+    val isLiked: LiveData<Boolean> = MutableLiveData(_isLiked)
 
-    fun onClick() = parentViewModel.onItemClicked(photo.id)
+    private var _likes = photo.likes
+        set(value) {
+            field = value
+            (likes as MutableLiveData).postValue(value)
+        }
+    val likes: LiveData<Int> = MutableLiveData(_likes)
 
-    fun onOptionsClicked() = parentViewModel.onItemOptionsClicked(photo.id)
+    fun updateLikes(liked: Boolean, likes: Int) {
+        _isLiked = liked
+        _likes = likes
+    }
 
-    fun onLikeClicked() = parentViewModel.onItemLikeClicked(photo.id)
+    fun onClick() = parentViewModel.onItemClicked(id)
 
-    fun onCollectClicked() = parentViewModel.onItemCollectClicked(photo.id)
+    fun onOptionsClicked() = parentViewModel.onItemOptionsClicked(id)
+
+    fun onLikeClicked() = parentViewModel.onItemLikeClicked(id, _isLiked)
+
+    fun onCollectClicked() = parentViewModel.onItemCollectClicked(id)
 
     interface Navigation {
         fun onItemClicked(photoId: String)
         fun onItemOptionsClicked(photoId: String)
-        fun onItemLikeClicked(photoId: String)
+        fun onItemLikeClicked(photoId: String, isLiked: Boolean)
         fun onItemCollectClicked(photoId: String)
     }
 }

@@ -4,6 +4,8 @@ import com.p2lem8dev.unsplashapi.PhotosApi
 import com.p2lem8dev.unsplashapi.models.FullPhoto
 import com.p2lem8dev.unsplashapi.models.Photo
 import com.p2lem8dev.unsplashapi.models.PhotoStats
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 
 internal class PhotosRepositoryImpl(
@@ -15,34 +17,33 @@ internal class PhotosRepositoryImpl(
         page: Int,
         perPage: Int,
         orderBy: PhotosRepository.ListOrderBy
-    ): List<Photo> = photosApi.listPhotos(
-        page = page,
-        perPage = perPage,
-        orderBy = orderBy.name.toLowerCase(Locale.getDefault()),
-        clientId = appKey
-    )
+    ): List<Photo> = withContext(Dispatchers.IO) {
+        photosApi.listPhotos(
+            page = page,
+            perPage = perPage,
+            orderBy = orderBy.name.toLowerCase(Locale.getDefault()),
+            clientId = appKey
+        )
+    }
 
-    override suspend fun getPhoto(id: String): FullPhoto = photosApi.getPhoto(id, appKey)
+    override suspend fun getPhoto(id: String): FullPhoto =
+        withContext(Dispatchers.IO) { photosApi.getPhoto(id, appKey) }
 
     override suspend fun getPhotoStats(id: String): PhotoStats =
-        photosApi.getPhotoStatistics(id, clientId = appKey)
+        withContext(Dispatchers.IO) { photosApi.getPhotoStatistics(id, clientId = appKey) }
 
     override suspend fun getTrackableDownloadLink(id: String): String =
-        photosApi.getPhotoDownloadLink(id, appKey).url
+        withContext(Dispatchers.IO) { photosApi.getPhotoDownloadLink(id, appKey).url }
 
-    override suspend fun likePhoto(id: String) {
-        photosApi.likePhoto(id, appKey)
+    override suspend fun likePhoto(id: String): Photo = withContext(Dispatchers.IO) {
+        photosApi
+            .likePhoto(id, appKey)
+            .photo
     }
 
-    override suspend fun unlikePhoto(id: String) {
-        photosApi.unlikePhoto(id, appKey)
-    }
-
-    /**
-     * Load current model and toggle state. Then return
-     * new state of the model
-     */
-    override suspend fun toggleLike(id: String): Boolean {
-        TODO("Not implemented")
+    override suspend fun unlikePhoto(id: String): Photo = withContext(Dispatchers.IO) {
+        photosApi
+            .unlikePhoto(id, appKey)
+            .photo
     }
 }
