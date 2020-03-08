@@ -1,5 +1,6 @@
 package com.p2lem8dev.esssplash.photos
 
+import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.p2lem8dev.unsplashapi.models.Photo
@@ -15,6 +16,7 @@ class PhotosSubViewModel(
 
     val profileImage = photo.user.profileImage.medium
     val imageUrl = photo.urls.regular
+    val imageColor = Color.parseColor(photo.color)
 
     private var _isLiked = photo.likedByUser
         private set(value) {

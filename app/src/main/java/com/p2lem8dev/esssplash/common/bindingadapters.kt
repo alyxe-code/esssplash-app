@@ -17,8 +17,8 @@ private val DEFAULT_TRANSITION
         .withCrossFade(Constants.IMAGE_TRANSITION_DURATION)
         .also { imageTransition = it }
 
-@BindingAdapter("image_url")
-fun setImageByUrl(imageView: ImageView, imageUrl: String?) {
+@BindingAdapter(value = ["image_url", "image_color"])
+fun setImageByUrl(imageView: ImageView, imageUrl: String?, imageColor: Int?) {
     imageUrl ?: return
 
     Glide

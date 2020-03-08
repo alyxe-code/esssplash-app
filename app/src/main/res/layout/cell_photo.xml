@@ -85,6 +85,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/mainImage"
+            image_color="@{ viewModel.imageColor }"
             image_url="@{ viewModel.imageUrl }"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_height_default"
