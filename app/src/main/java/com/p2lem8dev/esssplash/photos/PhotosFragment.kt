@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import com.p2lem8dev.esssplash.R
 import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
 import com.p2lem8dev.esssplash.common.*
-import com.p2lem8dev.esssplash.common.list.LoadingCell
-import com.p2lem8dev.esssplash.common.list.StaticListAdapter
+import com.p2lem8dev.esssplash.common.list.DefaultPagedListAdapter
 import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
 import com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,8 +27,7 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
     }
 
     private lateinit var binding: FragmentPhotosBinding
-    private lateinit var adapter: StaticListAdapter<ViewDataBinding>
-
+    private lateinit var adapter: DefaultPagedListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,17 +44,11 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        adapter = StaticListAdapter(emptyList(), viewLifecycleOwner)
+        adapter = DefaultPagedListAdapter(viewLifecycleOwner)
         binding.recycler.adapter = adapter
 
-        viewModel.photos.observe(viewLifecycleOwner, this::updatePhotosList)
+        viewModel.photosPagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         viewModel.navigation.observe(viewLifecycleOwner, this)
-    }
-
-    private fun updatePhotosList(list: List<PhotosSubViewModel>?) {
-        list ?: return
-        val newList = list.map(::PhotosCell) + LoadingCell()
-        adapter.submitList(newList)
     }
 
     private var optionsFragment: Fragment? = null

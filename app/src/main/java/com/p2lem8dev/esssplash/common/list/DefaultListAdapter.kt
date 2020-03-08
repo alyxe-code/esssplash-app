@@ -7,15 +7,15 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
-class StaticListAdapter<T : ViewDataBinding>(
-    cells: List<Cell<T>>,
+class DefaultListAdapter<T : ViewDataBinding>(
+    cells: List<Binding<T>>,
     private val lifecycleOwner: LifecycleOwner
-) : RecyclerView.Adapter<StaticListAdapter.ViewHolder<T>>() {
+) : RecyclerView.Adapter<DefaultListAdapter.ViewHolder<T>>() {
 
     class ViewHolder<T : ViewDataBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
 
     private var cells = cells.toMutableList()
-    private val visibleCells = mutableMapOf<ViewHolder<T>, Cell<T>>()
+    private val visibleCells = mutableMapOf<ViewHolder<T>, Binding<T>>()
 
     override fun getItemViewType(position: Int): Int = cells[position].layoutID
 
@@ -52,7 +52,7 @@ class StaticListAdapter<T : ViewDataBinding>(
         clearAll()
     }
 
-    fun submitList(list: List<Cell<T>>) {
+    fun submitList(list: List<Binding<T>>) {
         this.cells = list.toMutableList()
         notifyDataSetChanged()
     }

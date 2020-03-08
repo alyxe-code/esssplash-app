@@ -41,7 +41,7 @@ class PhotosSubViewModel(
 
     fun onOptionsClicked() = parentViewModel.onItemOptionsClicked(id)
 
-    fun onLikeClicked() = parentViewModel.onItemLikeClicked(id, _isLiked)
+    fun onLikeClicked() = parentViewModel.onItemLikeClicked(this, id, _isLiked)
 
     fun onCollectClicked() = parentViewModel.onItemCollectClicked(id)
 
@@ -50,7 +50,7 @@ class PhotosSubViewModel(
     interface Navigation {
         fun onItemClicked(photoId: String)
         fun onItemOptionsClicked(photoId: String)
-        fun onItemLikeClicked(photoId: String, isLiked: Boolean)
+        fun onItemLikeClicked(self: PhotosSubViewModel, photoId: String, isLiked: Boolean)
         fun onItemCollectClicked(photoId: String)
     }
 }
