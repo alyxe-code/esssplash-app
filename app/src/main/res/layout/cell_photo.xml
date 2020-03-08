@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/offset_12"
-            android:layout_marginTop="@dimen/offset_12"
+            android:layout_marginTop="@dimen/offset_8"
             android:layout_marginBottom="@dimen/offset_8"
             android:onClick="@{ _ -> viewModel.onLikeClicked() }"
             android:src="@drawable/ic_baseline_favorite_border_24"
