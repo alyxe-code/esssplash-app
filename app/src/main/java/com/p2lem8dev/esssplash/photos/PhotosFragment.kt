@@ -1,7 +1,6 @@
 package com.p2lem8dev.esssplash.photos
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
 import com.p2lem8dev.esssplash.common.list.LoadingCell
 import com.p2lem8dev.esssplash.common.list.StaticListAdapter
+import com.p2lem8dev.esssplash.common.showException
 import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
 import com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -67,7 +67,6 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
     }
 
     private fun hideOptions() = childFragmentManager.commit {
-        Log.d("PHOTOS_OPTIONS", "Closing...")
         val fragment = optionsFragment ?: return@commit
         remove(fragment)
         optionsFragment = null
@@ -75,7 +74,7 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
 
     override fun displayPhoto(photoId: String) = TODO("Not implemented")
 
-    override fun displayAddToCollection(photoId: String) {
-        TODO("Not yet implemented")
-    }
+    override fun displayAddToCollection(photoId: String): Unit = TODO("Not yet implemented")
+
+    override fun displayException(exception: Exception) = showException(exception)
 }
