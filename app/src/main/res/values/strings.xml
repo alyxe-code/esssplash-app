@@ -15,4 +15,7 @@
     <string name="http_error_server_exception">Something gone wrong</string>
 
     <string name="error">Error</string>
+    <string name="user_profile_image_description">User profile image</string>
+    <string name="like_description">Liked</string>
+    <string name="collect_description">Collect</string>
 </resources>

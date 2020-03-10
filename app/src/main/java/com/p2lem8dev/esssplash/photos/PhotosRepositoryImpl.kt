@@ -17,9 +17,10 @@ class PhotosRepositoryImpl(
     override val loadedSize: Int get() = storage.size
 
     override suspend fun loadInitial() {
+        Log.d("PHOTOS", "Loading page 0")
         val items = repository.listPhotos(
             page = config.initPage,
-            perPage = config.pageSize,
+            perPage = 0,
             orderBy = prepareOrderBy(config.orderBy)
         )
         storage.save(items)

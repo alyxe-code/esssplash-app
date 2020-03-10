@@ -1,6 +1,5 @@
 package com.p2lem8dev.esssplash.photos.paging
 
-import android.util.Log
 import androidx.databinding.ViewDataBinding
 import androidx.paging.PagedList
 import com.p2lem8dev.esssplash.common.list.ComparableBinding
@@ -22,7 +21,6 @@ class PhotosBoundaryCallback(
     override fun onItemAtEndLoaded(itemAtEnd: ComparableBinding<ViewDataBinding>) {
         scope.launch(Dispatchers.Default) {
             val loadedSize = repository.loadedSize
-            Log.d("PHOTOS", "BoundaryCallback ${repository.loadedSize} $pageSize")
             val completePage = loadedSize % pageSize == 0
             val page = if (completePage)
                 loadedSize / pageSize

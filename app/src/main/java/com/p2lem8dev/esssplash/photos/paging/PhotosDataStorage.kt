@@ -1,6 +1,5 @@
 package com.p2lem8dev.esssplash.photos.paging
 
-import android.util.Log
 import com.p2lem8dev.esssplash.common.list.DataStorage
 import com.p2lem8dev.unsplashapi.models.Photo
 import java.util.concurrent.CopyOnWriteArrayList
@@ -12,7 +11,6 @@ class PhotosDataStorage(private val onChanged: () -> Unit) : DataStorage<Photo> 
 
     override fun save(items: List<Photo>) {
         cache.addAll(items)
-        Log.d("PHOTOS", "Cache size increased to ${cache.size} | $size")
         onChanged()
     }
 
@@ -23,10 +21,11 @@ class PhotosDataStorage(private val onChanged: () -> Unit) : DataStorage<Photo> 
 
     override fun all(): List<Photo> = cache.toList()
 
-    override fun get(startPosition: Int, size: Int): List<Photo> {
-        if (startPosition > cache.size) return emptyList()
-        if (startPosition + size > cache.size)
-            return cache.subList(startPosition, cache.size)
-        return cache.subList(startPosition, startPosition + size)
+    override fun get(startPosition: Int, size: Int): List<Photo> = when {
+        size < 0 || size == 0 -> emptyList()
+        startPosition < 0 -> emptyList()
+        startPosition > cache.size -> emptyList()
+        startPosition + size > cache.size -> cache.subList(startPosition, cache.size)
+        else -> cache.subList(startPosition, startPosition + size)
     }
 }

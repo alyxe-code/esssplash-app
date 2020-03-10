@@ -15,12 +15,15 @@
         <import
             alias="viewUtil"
             type="com.p2lem8dev.esssplash.photos.PhotosViewUtil" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/color_background">
+        android:background="?attr/color_background"
+        android:paddingBottom="@dimen/offset_8">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/profileImage"
@@ -30,6 +33,7 @@
             android:layout_height="32dp"
             android:layout_marginStart="@dimen/offset_12"
             android:layout_marginTop="@dimen/offset_8"
+            android:contentDescription="@string/user_profile_image_description"
             app:layout_constraintEnd_toStartOf="@id/names"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,6 +56,7 @@
                 style="@style/TextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="yes"
                 android:text="@{ viewModel.name }"
                 android:textSize="12sp"
                 tools:text="@tools:sample/full_names" />
@@ -61,6 +66,7 @@
                 style="@style/TextSubTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="auto"
                 android:text="@{ `@` + viewModel.username }"
                 tools:text="@string/username" />
 
@@ -95,8 +101,10 @@
             android:layout_height="@dimen/image_height_default"
             android:layout_marginTop="@dimen/offset_8"
             android:clickable="true"
+            android:contentDescription="@{ viewModel.description }"
             android:elevation="0dp"
             android:focusable="true"
+            android:importantForAccessibility="yes"
             android:onClick="@{ _ -> viewModel.onClick() }"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,9 +119,7 @@
             android:layout_marginStart="@dimen/offset_12"
             android:layout_marginTop="@dimen/offset_8"
             android:layout_marginEnd="@dimen/offset_12"
-            android:layout_marginBottom="@dimen/offset_8"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mainImage">
@@ -122,6 +128,7 @@
                 android:id="@+id/like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/like_description"
                 android:onClick="@{ _ -> viewModel.onLikeClicked() }"
                 android:src="@drawable/ic_baseline_favorite_border_24" />
 
@@ -136,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/offset_12"
+                android:contentDescription="@string/collect_description"
                 android:onClick="@{ _ -> viewModel.onCollectClicked() }"
                 android:src="@drawable/ic_baseline_bookmark_border_24" />
 

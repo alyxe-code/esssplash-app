@@ -18,6 +18,12 @@ class PhotosSubViewModel(
     val imageUrl = photo.urls.regular
     val imageColor = Color.parseColor(photo.color)
 
+    val description = when {
+        !photo.description.isNullOrBlank() -> photo.description
+        !photo.altDescription.isNullOrBlank() -> photo.altDescription
+        else -> null
+    }?.apply { trim() }
+
     private var _isLiked = photo.likedByUser
         private set(value) {
             field = value

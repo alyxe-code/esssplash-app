@@ -6,5 +6,5 @@ object Constants {
 
     const val IMAGE_TRANSITION_DURATION = 400
 
-    const val PHOTOS_ITEMS_PER_PAGE = 2
+    const val PHOTOS_ITEMS_PER_PAGE = 10
 }

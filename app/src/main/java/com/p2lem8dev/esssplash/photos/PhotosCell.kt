@@ -20,10 +20,10 @@ class PhotosCell(
     }
 
     override fun isContentSame(other: ComparableBinding<ViewDataBinding>): Boolean =
-        (other as? PhotosCell)?.viewModel?.photo == viewModel.photo
+        (other as? PhotosCell)?.viewModel?.photo === viewModel.photo
 
     override fun isItemSame(other: ComparableBinding<ViewDataBinding>): Boolean =
-        (other as? PhotosCell)?.viewModel?.id == viewModel.id
+        (other as? PhotosCell)?.viewModel?.id === viewModel.id
 
     override fun onResourceLoaded() = Unit
 }
