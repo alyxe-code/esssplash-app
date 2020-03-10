@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.p2lem8dev.unsplashapi.models.Photo
 
 class PhotosSubViewModel(
-    photo: Photo,
+    val photo: Photo,
     private val parentViewModel: Navigation
 ) {
     val id = photo.id

@@ -8,6 +8,10 @@
             name="viewModel"
             type="com.p2lem8dev.esssplash.photos.PhotosSubViewModel" />
 
+        <variable
+            name="cell"
+            type="com.p2lem8dev.esssplash.photos.PhotosCell" />
+
         <import
             alias="viewUtil"
             type="com.p2lem8dev.esssplash.photos.PhotosViewUtil" />
@@ -85,8 +89,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/mainImage"
-            image_color="@{ viewModel.imageColor }"
-            image_url="@{ viewModel.imageUrl }"
+            imageOnResourceLoaded="@{ () -> cell.onResourceLoaded() }"
+            imageUrl="@{ viewModel.imageUrl }"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_height_default"
             android:layout_marginTop="@dimen/offset_8"
@@ -100,37 +104,42 @@
             app:layout_constraintTop_toBottomOf="@id/profileImage"
             tools:background="#f4f665" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/like"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/offset_12"
             android:layout_marginTop="@dimen/offset_8"
+            android:layout_marginEnd="@dimen/offset_12"
             android:layout_marginBottom="@dimen/offset_8"
-            android:onClick="@{ _ -> viewModel.onLikeClicked() }"
-            android:src="@drawable/ic_baseline_favorite_border_24"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mainImage" />
+            app:layout_constraintTop_toBottomOf="@id/mainImage">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/likesCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/offset_12"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/like"
-            app:layout_constraintTop_toTopOf="@id/like" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ _ -> viewModel.onLikeClicked() }"
+                android:src="@drawable/ic_baseline_favorite_border_24" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/collect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{ _ -> viewModel.onCollectClicked() }"
-            android:src="@drawable/ic_baseline_bookmark_border_24"
-            app:layout_constraintBottom_toBottomOf="@id/like"
-            app:layout_constraintStart_toEndOf="@id/likesCount"
-            app:layout_constraintTop_toTopOf="@id/like" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/likesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/offset_12" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/offset_12"
+                android:onClick="@{ _ -> viewModel.onCollectClicked() }"
+                android:src="@drawable/ic_baseline_bookmark_border_24" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

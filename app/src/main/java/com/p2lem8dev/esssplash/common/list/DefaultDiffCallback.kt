@@ -7,10 +7,14 @@ class DefaultDiffCallback<T : ViewDataBinding> : DiffUtil.ItemCallback<Comparabl
     override fun areItemsTheSame(
         oldItem: ComparableBinding<T>,
         newItem: ComparableBinding<T>
-    ): Boolean = oldItem.areItemsTheSame(newItem)
+    ): Boolean {
+        return oldItem.isItemSame(newItem)
+    }
 
     override fun areContentsTheSame(
         oldItem: ComparableBinding<T>,
         newItem: ComparableBinding<T>
-    ): Boolean = oldItem.areContentsTheSame(newItem)
+    ): Boolean {
+        return oldItem.isContentSame(newItem)
+    }
 }

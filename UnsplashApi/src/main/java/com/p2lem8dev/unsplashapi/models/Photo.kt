@@ -3,7 +3,7 @@ package com.p2lem8dev.unsplashapi.models
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-class Photo(
+data class Photo(
     override val id: String,
     @SerializedName("created_at")
     override val created: Date,

@@ -11,12 +11,12 @@ import java.util.*
 internal class PhotosRepositoryImpl(
     private val photosApi: PhotosApi,
     private val appKey: String
-) : PhotosRepository {
+) : UnsplashPhotosRepository {
 
     override suspend fun listPhotos(
         page: Int,
         perPage: Int,
-        orderBy: PhotosRepository.ListOrderBy
+        orderBy: UnsplashPhotosRepository.ListOrderBy
     ): List<Photo> = withContext(Dispatchers.IO) {
         photosApi.listPhotos(
             page = page,

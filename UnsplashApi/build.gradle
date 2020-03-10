@@ -13,6 +13,9 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    def logger_version = "4.4.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logger_version"
 }
 
 sourceCompatibility = "1.8"

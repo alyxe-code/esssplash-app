@@ -4,7 +4,7 @@ import com.p2lem8dev.unsplashapi.models.FullPhoto
 import com.p2lem8dev.unsplashapi.models.Photo
 import com.p2lem8dev.unsplashapi.models.PhotoStats
 
-interface PhotosRepository {
+interface UnsplashPhotosRepository {
 
     enum class ListOrderBy { Latest, Oldest, Popular }
 
