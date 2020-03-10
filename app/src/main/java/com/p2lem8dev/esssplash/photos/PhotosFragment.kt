@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.paging.PagedList
 import com.p2lem8dev.esssplash.R
 import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
 import com.p2lem8dev.esssplash.common.*
-import com.p2lem8dev.esssplash.common.list.ComparableBinding
 import com.p2lem8dev.esssplash.common.list.DefaultPagedListAdapter
 import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
 import com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment
@@ -52,13 +49,6 @@ class PhotosFragment : Fragment(), PhotosViewModel.Navigation {
 
         viewModel.photos.observe(viewLifecycleOwner, adapter::submitList)
         viewModel.navigation.observe(viewLifecycleOwner, this)
-    }
-
-    private fun submitList(pagedList: PagedList<ComparableBinding<ViewDataBinding>>?) {
-        pagedList ?: return
-        val prevPosition = binding.recycler.scrollY
-        adapter.submitList(pagedList)
-        binding.recycler.scrollToPosition(prevPosition)
     }
 
     private var optionsFragment: Fragment? = null

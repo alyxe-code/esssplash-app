@@ -13,22 +13,6 @@
         android:layout_height="match_parent"
         android:background="?attr/color_background">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_shape_search"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:hint="@string/hint_search"
-            android:maxLines="1"
-            android:paddingStart="@dimen/offset_16"
-            android:paddingTop="@dimen/offset_12"
-            android:paddingEnd="@dimen/offset_16"
-            android:paddingBottom="@dimen/offset_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="0dp"
@@ -37,7 +21,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search"
+            app:layout_constraintTop_toBottomOf="parent"
             tools:listitem="@layout/cell_photo" />
 
         <FrameLayout
