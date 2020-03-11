@@ -6,7 +6,7 @@
 
         <variable
             name="fragment"
-            type="com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment" />
+            type="com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/dialog_list_options_width"
             android:layout_height="wrap_content"
             android:background="?attr/color_background"
             android:divider="?attr/color_background"
@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/photos_options_cell" />
+            tools:listitem="@layout/cell_photos_options" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

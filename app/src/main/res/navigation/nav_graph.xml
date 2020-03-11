@@ -10,6 +10,40 @@
         android:id="@+id/fragmentPhotos"
         android:name="com.p2lem8dev.esssplash.photos.PhotosFragment"
         android:label="@string/photos"
-        tools:layout="@layout/fragment_photos" />
+        tools:layout="@layout/photos_fragment">
+
+        <action
+            android:id="@+id/photosToPhotosList"
+            app:destination="@id/fragmentPhotosList" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPhotosList"
+        android:name="com.p2lem8dev.esssplash.photos.list.PhotosListFragment"
+        android:label="@string/photos"
+        tools:layout="@layout/fragment_photos">
+
+        <action
+            android:id="@+id/photosListToPhotosOptions"
+            app:destination="@id/fragmentPhotosOptions"
+            app:popUpTo="@id/fragmentPhotosList" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPhotosHeader"
+        android:name="com.p2lem8dev.esssplash.photos.header.PhotosHeaderFragment"
+        android:label="@string/photos"
+        tools:layout="@layout/fragment_photos_header" />
+
+    <fragment
+        android:id="@+id/fragmentPhotosOptions"
+        android:name="com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment"
+        android:label="@string/photos_options"
+        tools:layout="@layout/fragment_photos_options">
+        <argument
+            android:name="model"
+            app:argType="com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment$PhotoModel" />
+    </fragment>
+
 
 </navigation>

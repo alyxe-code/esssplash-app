@@ -1,0 +1,92 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.p2lem8dev.esssplash.photos.header.PhotosHeaderViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/background"
+            imageUrl="@{ viewModel.backgroundUrl }"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/image_height_photos_header"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginEnd="@dimen/offset_12"
+            android:layout_marginBottom="@dimen/offset_12"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/appDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginEnd="@dimen/offset_12"
+            android:layout_marginBottom="@dimen/offset_24"
+            android:text="@string/app_description"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/searchWrapper"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/searchWrapper"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_edit_wrapper_height"
+            android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginEnd="@dimen/offset_12"
+            android:layout_marginBottom="64dp"
+            android:background="@drawable/shape_photos_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_12"
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintBottom_toBottomOf="@id/searchWrapper"
+            app:layout_constraintStart_toStartOf="@id/searchWrapper"
+            app:layout_constraintTop_toTopOf="@id/searchWrapper" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginEnd="@dimen/offset_12"
+            android:background="@drawable/shape_photos_search"
+            android:hint="@string/hint_search"
+            android:singleLine="true"
+            android:text="@{ viewModel.searchQuery }"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/searchWrapper"
+            app:layout_constraintEnd_toEndOf="@id/searchWrapper"
+            app:layout_constraintStart_toEndOf="@id/searchIcon"
+            app:layout_constraintTop_toTopOf="@id/searchWrapper"
+            tools:text="@string/search" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

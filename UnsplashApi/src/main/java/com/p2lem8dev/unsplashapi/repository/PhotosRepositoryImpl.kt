@@ -46,4 +46,7 @@ internal class PhotosRepositoryImpl(
             .unlikePhoto(id, appKey)
             .photo
     }
+
+    override suspend fun getRandomPhoto(): Photo =
+        withContext(Dispatchers.IO) { photosApi.getRandomPhoto() }
 }

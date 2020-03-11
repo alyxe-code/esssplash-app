@@ -1,16 +1,15 @@
-package com.p2lem8dev.esssplash.photos.paging
+package com.p2lem8dev.esssplash.photos.list.paging
 
 import androidx.databinding.ViewDataBinding
 import androidx.paging.PagedList
 import com.p2lem8dev.esssplash.common.list.ComparableBinding
-import com.p2lem8dev.esssplash.photos.PhotosRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PhotosBoundaryCallback(
     private val scope: CoroutineScope,
-    private val repository: PhotosRepository,
+    private val repository: PhotosPagingRepository,
     private val pageSize: Int
 ) : PagedList.BoundaryCallback<ComparableBinding<ViewDataBinding>>() {
 

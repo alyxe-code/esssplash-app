@@ -8,6 +8,7 @@
     <string name="username">\@%s</string>
     <string name="photos_options_copy_link">Copy Link</string>
     <string name="photos_options_share_to">Share to…</string>
+    <string name="photos_options_sharable_link_copied">Link has been copied to clipboard</string>
     <string name="photos_options_hide">Hide photo</string>
 
     <string name="http_error_not_authorized">Not authorized</string>
@@ -18,4 +19,6 @@
     <string name="user_profile_image_description">User profile image</string>
     <string name="like_description">Liked</string>
     <string name="collect_description">Collect</string>
+    <string name="app_description">The internet\'s source of freely usable images.\nPowered by creators everywhere.</string>
+    <string name="photos_options">Photos Options</string>
 </resources>

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.p2lem8dev.esssplash.photos.PhotosViewModel" />
+            type="com.p2lem8dev.esssplash.photos.list.PhotosListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

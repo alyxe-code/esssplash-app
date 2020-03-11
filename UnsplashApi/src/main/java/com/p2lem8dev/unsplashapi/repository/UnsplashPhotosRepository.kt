@@ -19,5 +19,7 @@ interface UnsplashPhotosRepository {
     suspend fun likePhoto(id: String): Photo
 
     suspend fun unlikePhoto(id: String): Photo
+
+    suspend fun getRandomPhoto(): Photo
 }
 

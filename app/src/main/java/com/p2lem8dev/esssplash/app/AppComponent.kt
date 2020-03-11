@@ -15,5 +15,5 @@ import dagger.Component
     ]
 )
 interface AppComponent {
-    fun photos(): UnsplashPhotosRepository
+    fun photosRepository(): UnsplashPhotosRepository
 }

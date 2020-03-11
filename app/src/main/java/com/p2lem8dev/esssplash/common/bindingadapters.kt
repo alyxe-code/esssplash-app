@@ -32,11 +32,17 @@ interface OnResourceLoadedCallback {
 //    onResourceLoaded?.onResourceLoaded()
 //}
 
-@BindingAdapter(value = ["imageUrl", "imageOnResourceLoaded"], requireAll = false)
+const val DEFAULT_THUMBNAIL_QUALITY = 10f
+
+@BindingAdapter(
+    value = ["imageUrl", "imageOnResourceLoaded", "imageSizeThumbnail"],
+    requireAll = false
+)
 fun setImageByUrl(
     imageView: ImageView,
     imageUrl: String?,
-    imageOnResourceLoaded: OnResourceLoadedCallback?
+    imageOnResourceLoaded: OnResourceLoadedCallback?,
+    imageSizeThumbnail: Float? = DEFAULT_THUMBNAIL_QUALITY
 ) {
     imageUrl ?: return
 
@@ -63,7 +69,7 @@ fun setImageByUrl(
             }
         })
         .transform(CenterCrop())
-        .thumbnail(0.1f)
+        .thumbnail((imageSizeThumbnail ?: DEFAULT_THUMBNAIL_QUALITY) / 100)
         .transition(DEFAULT_TRANSITION)
         .into(imageView)
 }

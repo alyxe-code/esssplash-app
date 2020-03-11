@@ -6,15 +6,15 @@
 
         <variable
             name="viewModel"
-            type="com.p2lem8dev.esssplash.photos.PhotosSubViewModel" />
+            type="com.p2lem8dev.esssplash.photos.list.PhotosListSubViewModel" />
 
         <variable
             name="cell"
-            type="com.p2lem8dev.esssplash.photos.PhotosCell" />
+            type="com.p2lem8dev.esssplash.photos.list.PhotosListCell" />
 
         <import
             alias="viewUtil"
-            type="com.p2lem8dev.esssplash.photos.PhotosViewUtil" />
+            type="com.p2lem8dev.esssplash.photos.list.PhotosListViewUtil" />
 
         <import type="android.view.View" />
     </data>

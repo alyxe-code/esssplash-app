@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.photos
+package com.p2lem8dev.esssplash.photos.list
 
 import androidx.databinding.ViewDataBinding
 import com.p2lem8dev.esssplash.R
@@ -6,8 +6,8 @@ import com.p2lem8dev.esssplash.common.OnResourceLoadedCallback
 import com.p2lem8dev.esssplash.common.list.ComparableBinding
 import com.p2lem8dev.esssplash.databinding.CellPhotoBinding
 
-class PhotosCell(
-    private val viewModel: PhotosSubViewModel
+class PhotosListCell(
+    val viewModel: PhotosListSubViewModel
 ) : ComparableBinding<CellPhotoBinding>,
     OnResourceLoadedCallback {
 
@@ -20,10 +20,10 @@ class PhotosCell(
     }
 
     override fun isContentSame(other: ComparableBinding<ViewDataBinding>): Boolean =
-        (other as? PhotosCell)?.viewModel?.photo === viewModel.photo
+        (other as? PhotosListCell)?.viewModel?.photo === viewModel.photo
 
     override fun isItemSame(other: ComparableBinding<ViewDataBinding>): Boolean =
-        (other as? PhotosCell)?.viewModel?.id === viewModel.id
+        (other as? PhotosListCell)?.viewModel?.id === viewModel.id
 
     override fun onResourceLoaded() = Unit
 }

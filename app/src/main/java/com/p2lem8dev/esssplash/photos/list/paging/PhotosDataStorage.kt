@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.photos.paging
+package com.p2lem8dev.esssplash.photos.list.paging
 
 import com.p2lem8dev.esssplash.common.list.DataStorage
 import com.p2lem8dev.unsplashapi.models.Photo

@@ -1,8 +1,8 @@
-package com.p2lem8dev.esssplash.photos
+package com.p2lem8dev.esssplash.photos.list.paging
 
 import com.p2lem8dev.unsplashapi.models.Photo
 
-interface PhotosRepository {
+interface PhotosPagingRepository {
 
     enum class OrderBy { Latest, Oldest, Popular }
 

@@ -35,6 +35,8 @@ interface PhotosApi {
         @Query("client_id") clientId: String
     ): DownloadPhotoModel
 
+    class DownloadPhotoModel(val url: String)
+
     @POST("photos/{id}/like")
     suspend fun likePhoto(
         @Path("id") id: String,
@@ -47,7 +49,8 @@ interface PhotosApi {
         @Query("client_id") clientId: String
     ): LikePhotoResponse
 
-    class DownloadPhotoModel(val url: String)
-
     class LikePhotoResponse(val photo: Photo, val user: User)
+
+    @GET("photos/random")
+    fun getRandomPhoto(): Photo
 }

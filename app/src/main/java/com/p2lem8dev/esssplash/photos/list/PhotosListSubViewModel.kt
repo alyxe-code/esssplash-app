@@ -1,11 +1,11 @@
-package com.p2lem8dev.esssplash.photos
+package com.p2lem8dev.esssplash.photos.list
 
 import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.p2lem8dev.unsplashapi.models.Photo
 
-class PhotosSubViewModel(
+class PhotosListSubViewModel(
     val photo: Photo,
     private val parentViewModel: Navigation
 ) {
@@ -56,7 +56,7 @@ class PhotosSubViewModel(
     interface Navigation {
         fun onItemClicked(photoId: String)
         fun onItemOptionsClicked(photoId: String)
-        fun onItemLikeClicked(self: PhotosSubViewModel, photoId: String, isLiked: Boolean)
+        fun onItemLikeClicked(self: PhotosListSubViewModel, photoId: String, isLiked: Boolean)
         fun onItemCollectClicked(photoId: String)
     }
 }

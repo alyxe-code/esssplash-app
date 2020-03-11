@@ -1,16 +1,16 @@
-package com.p2lem8dev.esssplash.photos
+package com.p2lem8dev.esssplash.photos.list.paging
 
 import android.util.Log
 import com.p2lem8dev.esssplash.common.list.DataStorage
-import com.p2lem8dev.esssplash.photos.PhotosRepository.OrderBy
+import com.p2lem8dev.esssplash.photos.list.paging.PhotosPagingRepository.OrderBy
 import com.p2lem8dev.unsplashapi.models.Photo
 import com.p2lem8dev.unsplashapi.repository.UnsplashPhotosRepository
 
-class PhotosRepositoryImpl(
+class PhotosPagingRepositoryImpl(
     private val storage: DataStorage<Photo>,
     private val repository: UnsplashPhotosRepository,
     private val config: Config
-) : PhotosRepository {
+) : PhotosPagingRepository {
 
     override fun getCached(startPosition: Int, size: Int) = storage.get(startPosition, size)
 

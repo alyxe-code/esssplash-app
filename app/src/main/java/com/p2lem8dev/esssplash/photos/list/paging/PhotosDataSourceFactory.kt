@@ -1,11 +1,10 @@
-package com.p2lem8dev.esssplash.photos.paging
+package com.p2lem8dev.esssplash.photos.list.paging
 
 import androidx.paging.DataSource
-import com.p2lem8dev.esssplash.photos.PhotosRepository
 import com.p2lem8dev.unsplashapi.models.Photo
 
 class PhotosDataSourceFactory(
-    private val repository: PhotosRepository
+    private val repository: PhotosPagingRepository
 ) : DataSource.Factory<Int, Photo>() {
 
     var dataSource: PhotosDataSource? = null

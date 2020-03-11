@@ -1,11 +1,11 @@
-package com.p2lem8dev.esssplash.photos
+package com.p2lem8dev.esssplash.photos.list
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.p2lem8dev.esssplash.R
 
-object PhotosViewUtil {
+object PhotosListViewUtil {
     @JvmStatic
     fun getFavoriteIcon(isFavorite: Boolean, context: Context): Drawable? {
         val iconId = if (isFavorite)
