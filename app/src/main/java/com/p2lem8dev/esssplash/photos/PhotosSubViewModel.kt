@@ -1,13 +1,13 @@
-package com.p2lem8dev.esssplash.photos.list
+package com.p2lem8dev.esssplash.photos
 
 import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.p2lem8dev.unsplashapi.models.Photo
 
-class PhotosListSubViewModel(
+class PhotosSubViewModel(
     val photo: Photo,
-    private val parentViewModel: Navigation
+    private val parent: Navigation
 ) {
     val id = photo.id
 
@@ -43,20 +43,20 @@ class PhotosListSubViewModel(
         _likes = likes
     }
 
-    fun onClick() = parentViewModel.onItemClicked(id)
+    fun onClick() = parent.onItemClicked(id)
 
-    fun onOptionsClicked() = parentViewModel.onItemOptionsClicked(id)
+    fun onOptionsClicked() = parent.onItemOptionsClicked(id)
 
-    fun onLikeClicked() = parentViewModel.onItemLikeClicked(this, id, _isLiked)
+    fun onLikeClicked() = parent.onItemLikeClicked(this, id, _isLiked)
 
-    fun onCollectClicked() = parentViewModel.onItemCollectClicked(id)
+    fun onCollectClicked() = parent.onItemCollectClicked(id)
 
     fun onUserClicked(): Unit = TODO("Not implemented")
 
     interface Navigation {
         fun onItemClicked(photoId: String)
         fun onItemOptionsClicked(photoId: String)
-        fun onItemLikeClicked(self: PhotosListSubViewModel, photoId: String, isLiked: Boolean)
+        fun onItemLikeClicked(self: PhotosSubViewModel, photoId: String, isLiked: Boolean)
         fun onItemCollectClicked(photoId: String)
     }
 }

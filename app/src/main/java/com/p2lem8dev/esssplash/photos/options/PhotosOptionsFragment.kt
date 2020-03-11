@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.photos.list.options
+package com.p2lem8dev.esssplash.photos.options
 
 import android.content.ClipData
 import android.content.ClipboardManager

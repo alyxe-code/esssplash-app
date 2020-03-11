@@ -1,4 +1,4 @@
-package com.p2lem8dev.esssplash.photos.list.paging
+package com.p2lem8dev.esssplash.photos.paging
 
 import androidx.databinding.ViewDataBinding
 import androidx.paging.PagedList

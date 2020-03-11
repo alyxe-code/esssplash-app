@@ -6,15 +6,15 @@
 
         <variable
             name="viewModel"
-            type="com.p2lem8dev.esssplash.photos.list.PhotosListSubViewModel" />
+            type="com.p2lem8dev.esssplash.photos.PhotosSubViewModel" />
 
         <variable
             name="cell"
-            type="com.p2lem8dev.esssplash.photos.list.PhotosListCell" />
+            type="com.p2lem8dev.esssplash.photos.PhotosCell" />
 
         <import
             alias="viewUtil"
-            type="com.p2lem8dev.esssplash.photos.list.PhotosListViewUtil" />
+            type="com.p2lem8dev.esssplash.photos.PhotosViewUtil" />
 
         <import type="android.view.View" />
     </data>
@@ -97,6 +97,7 @@
             android:id="@+id/mainImage"
             imageOnResourceLoaded="@{ () -> cell.onResourceLoaded() }"
             imageUrl="@{ viewModel.imageUrl }"
+            imageColor="@{ viewModel.imageColor }"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_height_default"
             android:layout_marginTop="@dimen/offset_8"

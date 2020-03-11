@@ -1,8 +1,8 @@
-package com.p2lem8dev.esssplash.photos.list.paging
+package com.p2lem8dev.esssplash.photos.paging
 
 import android.util.Log
 import com.p2lem8dev.esssplash.common.list.DataStorage
-import com.p2lem8dev.esssplash.photos.list.paging.PhotosPagingRepository.OrderBy
+import com.p2lem8dev.esssplash.photos.paging.PhotosPagingRepository.OrderBy
 import com.p2lem8dev.unsplashapi.models.Photo
 import com.p2lem8dev.unsplashapi.repository.UnsplashPhotosRepository
 

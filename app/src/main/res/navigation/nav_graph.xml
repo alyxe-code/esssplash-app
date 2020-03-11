@@ -3,27 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentPhotos"
+    app:startDestination="@id/fragmentPhotosList"
     tools:ignore="UnusedNavigation">
 
     <fragment
-        android:id="@+id/fragmentPhotos"
-        android:name="com.p2lem8dev.esssplash.photos.PhotosFragment"
-        android:label="@string/photos"
-        tools:layout="@layout/photos_fragment">
-
-        <action
-            android:id="@+id/photosToPhotosList"
-            app:destination="@id/fragmentPhotosList" />
-
-        <action
-            android:id="@+id/photosToPhotosHeader"
-            app:destination="@id/fragmentPhotosHeader" />
-    </fragment>
-
-    <fragment
         android:id="@+id/fragmentPhotosList"
-        android:name="com.p2lem8dev.esssplash.photos.list.PhotosListFragment"
+        android:name="com.p2lem8dev.esssplash.photos.PhotosFragment"
         android:label="@string/photos"
         tools:layout="@layout/fragment_photos">
 
@@ -34,19 +19,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/fragmentPhotosHeader"
-        android:name="com.p2lem8dev.esssplash.photos.header.PhotosHeaderFragment"
-        android:label="@string/photos"
-        tools:layout="@layout/fragment_photos_header" />
-
-    <fragment
         android:id="@+id/fragmentPhotosOptions"
-        android:name="com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment"
+        android:name="com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment"
         android:label="@string/photos_options"
         tools:layout="@layout/fragment_photos_options">
         <argument
             android:name="model"
-            app:argType="com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment$PhotoModel" />
+            app:argType="com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment$PhotoModel" />
     </fragment>
 
 

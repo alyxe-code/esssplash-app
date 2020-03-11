@@ -14,13 +14,16 @@
         android:background="@drawable/shape_photos_search">
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/offset_8"
             android:layout_marginVertical="@dimen/offset_4"
             android:background="@drawable/shape_photos_search"
             android:hint="@string/hint_search"
+            android:imeOptions="actionSearch"
             android:paddingHorizontal="@dimen/offset_8"
+            android:scrollHorizontally="true"
             android:paddingVertical="@dimen/offset_4"
             android:singleLine="true"
             android:text="@={ callback.searchQuery }"

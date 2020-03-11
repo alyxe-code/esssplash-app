@@ -6,14 +6,19 @@
 
         <variable
             name="cell"
-            type="com.p2lem8dev.esssplash.photos.header.PhotosHeaderListTagCell" />
+            type="com.p2lem8dev.esssplash.photos.PhotosTagCell" />
 
         <import type="android.view.View" />
+
+        <import
+            alias="viewUtil"
+            type="com.p2lem8dev.esssplash.photos.PhotosViewUtil" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{ () -> cell.onClick() }">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text"
@@ -27,6 +32,7 @@
             android:maxLength="20"
             android:singleLine="true"
             android:text="@{ cell.text }"
+            android:textColor="@{ cell.selectedTag.id == cell.tag.id ? @color/colorBlack : @color/colorDark }"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/close"

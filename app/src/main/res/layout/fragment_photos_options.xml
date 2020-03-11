@@ -6,7 +6,7 @@
 
         <variable
             name="fragment"
-            type="com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment" />
+            type="com.p2lem8dev.esssplash.photos.options.PhotosOptionsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
