@@ -1,6 +1,7 @@
 package com.p2lem8dev.esssplash.common
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -35,12 +36,13 @@ interface OnResourceLoadedCallback {
 const val DEFAULT_THUMBNAIL_QUALITY = 10f
 
 @BindingAdapter(
-    value = ["imageUrl", "imageOnResourceLoaded", "imageSizeThumbnail"],
+    value = ["imageUrl", "imageColor", "imageOnResourceLoaded", "imageSizeThumbnail"],
     requireAll = false
 )
 fun setImageByUrl(
     imageView: ImageView,
     imageUrl: String?,
+    imageColor: Int?,
     imageOnResourceLoaded: OnResourceLoadedCallback?,
     imageSizeThumbnail: Float? = DEFAULT_THUMBNAIL_QUALITY
 ) {
@@ -68,6 +70,7 @@ fun setImageByUrl(
                 return false
             }
         })
+        .placeholder(ColorDrawable(imageColor ?: Color.WHITE))
         .transform(CenterCrop())
         .thumbnail((imageSizeThumbnail ?: DEFAULT_THUMBNAIL_QUALITY) / 100)
         .transition(DEFAULT_TRANSITION)

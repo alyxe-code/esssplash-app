@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
 
-internal class PhotosRepositoryImpl(
+internal class UnsplashPhotosRepositoryImpl(
     private val photosApi: PhotosApi,
     private val appKey: String
 ) : UnsplashPhotosRepository {
@@ -47,6 +47,7 @@ internal class PhotosRepositoryImpl(
             .photo
     }
 
-    override suspend fun getRandomPhoto(): Photo =
-        withContext(Dispatchers.IO) { photosApi.getRandomPhoto() }
+    override suspend fun getRandomPhoto(): FullPhoto = withContext(Dispatchers.IO) {
+        photosApi.getSingleRandomPhoto(appKey)
+    }
 }

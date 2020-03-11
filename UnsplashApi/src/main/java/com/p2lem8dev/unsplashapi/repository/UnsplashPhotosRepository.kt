@@ -20,6 +20,6 @@ interface UnsplashPhotosRepository {
 
     suspend fun unlikePhoto(id: String): Photo
 
-    suspend fun getRandomPhoto(): Photo
+    suspend fun getRandomPhoto(): FullPhoto
 }
 

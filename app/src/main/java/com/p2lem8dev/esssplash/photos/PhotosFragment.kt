@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.p2lem8dev.esssplash.app.ViewModelFactory
 import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
+import com.p2lem8dev.esssplash.photos.header.PhotosHeaderFragment
+import com.p2lem8dev.esssplash.photos.list.PhotosListFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -31,9 +33,12 @@ class PhotosFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        findNavController().navigate(PhotosFragmentDirections.photosToPhotosList())
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        childFragmentManager.commit {
+            replace(binding.header.id, PhotosHeaderFragment())
+            replace(binding.content.id, PhotosListFragment())
+        }
+    }
 }

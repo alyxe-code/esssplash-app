@@ -1,0 +1,45 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.p2lem8dev.esssplash.common.view.SearchCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_photos_search">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/offset_8"
+            android:layout_marginVertical="@dimen/offset_4"
+            android:background="@drawable/shape_photos_search"
+            android:hint="@string/hint_search"
+            android:paddingHorizontal="@dimen/offset_8"
+            android:paddingVertical="@dimen/offset_4"
+            android:singleLine="true"
+            android:text="@={ callback.searchQuery }"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/searchIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/searchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/offset_4"
+            android:layout_marginEnd="@dimen/offset_8"
+            android:background="@drawable/ic_baseline_search_24"
+            android:onClick="@{ () -> callback.onSubmit() }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

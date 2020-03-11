@@ -15,6 +15,10 @@
         <action
             android:id="@+id/photosToPhotosList"
             app:destination="@id/fragmentPhotosList" />
+
+        <action
+            android:id="@+id/photosToPhotosHeader"
+            app:destination="@id/fragmentPhotosHeader" />
     </fragment>
 
     <fragment

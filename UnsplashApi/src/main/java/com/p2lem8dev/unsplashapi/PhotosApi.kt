@@ -52,5 +52,7 @@ interface PhotosApi {
     class LikePhotoResponse(val photo: Photo, val user: User)
 
     @GET("photos/random")
-    fun getRandomPhoto(): Photo
+    suspend fun getSingleRandomPhoto(
+        @Query("client_id") clientId: String
+    ): FullPhoto
 }

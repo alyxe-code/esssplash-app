@@ -12,7 +12,7 @@ import com.p2lem8dev.esssplash.app.App
 import com.p2lem8dev.esssplash.app.ViewModelFactory
 import com.p2lem8dev.esssplash.common.*
 import com.p2lem8dev.esssplash.common.list.DefaultPagedListAdapter
-import com.p2lem8dev.esssplash.databinding.FragmentPhotosBinding
+import com.p2lem8dev.esssplash.databinding.FragmentPhotosListBinding
 import com.p2lem8dev.esssplash.photos.list.options.PhotosOptionsFragment
 import com.p2lem8dev.unsplashapi.models.Photo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,7 +30,7 @@ class PhotosListFragment : Fragment(), PhotosListViewModel.Navigation {
         }
     }
 
-    private lateinit var binding: FragmentPhotosBinding
+    private lateinit var binding: FragmentPhotosListBinding
     private lateinit var adapter: DefaultPagedListAdapter
 
     override fun onCreateView(
@@ -38,7 +38,7 @@ class PhotosListFragment : Fragment(), PhotosListViewModel.Navigation {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPhotosBinding.inflate(inflater, container, false)
+        binding = FragmentPhotosListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
