@@ -31,7 +31,7 @@
             android:ellipsize="end"
             android:maxLength="20"
             android:singleLine="true"
-            android:text="@{ cell.text }"
+            android:text="@{ viewUtil.getTextFromTag(cell.tag.type, context) }"
             android:textColor="@{ cell.selectedTag.id == cell.tag.id ? @color/colorBlack : @color/colorDark }"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

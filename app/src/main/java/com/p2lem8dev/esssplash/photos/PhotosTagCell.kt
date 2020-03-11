@@ -17,7 +17,6 @@ class PhotosTagCell(
 
     override val layoutID: Int = R.layout.cell_photos_tag
 
-    val text = tag.text
     val closable = tag.closable
 
     override fun bind(binding: CellPhotosTagBinding) {

@@ -21,4 +21,7 @@
     <string name="collect_description">Collect</string>
     <string name="app_description">The internet\'s source of freely usable images.\nPowered by creators everywhere.</string>
     <string name="photos_options">Photos Options</string>
+
+    <string name="popular">POPULAR</string>
+    <string name="following">FOLLOWING</string>
 </resources>

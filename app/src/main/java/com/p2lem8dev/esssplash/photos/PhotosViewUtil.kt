@@ -25,4 +25,16 @@ object PhotosViewUtil {
 
         return ContextCompat.getColor(context, color)
     }
+
+    @JvmStatic
+    fun getTextFromTag(type: Tag.Type?, context: Context): String? {
+        val strId = when (type) {
+            Tag.Type.Popular -> R.string.popular
+            Tag.Type.Following -> R.string.following
+            is Tag.Type.Custom -> return type.text
+            null -> return null
+        }
+
+        return context.getString(strId)
+    }
 }

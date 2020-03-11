@@ -17,6 +17,7 @@ import com.p2lem8dev.esssplash.common.list.ComparableBinding
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigation
 import com.p2lem8dev.esssplash.common.livenavigation.LiveNavigationCoroutineImplementation
 import com.p2lem8dev.esssplash.common.view.SearchCallback
+import com.p2lem8dev.esssplash.photos.PhotosTagsUtil.Tag
 import com.p2lem8dev.esssplash.photos.paging.*
 import com.p2lem8dev.unsplashapi.models.Photo
 import com.p2lem8dev.unsplashapi.repository.UnsplashPhotosRepository
@@ -70,15 +71,27 @@ class PhotosViewModel(
     private val _navigation = LiveNavigationCoroutineImplementation<Navigation>()
     val navigation: LiveNavigation<Navigation> = _navigation
 
-    val tagsList: LiveData<List<PhotosTagsUtil.Tag>> = MutableLiveData(emptyList())
+    val tagsList: LiveData<List<Tag>> = MutableLiveData(emptyList())
 
-    private var _selectedTag: PhotosTagsUtil.Tag? = null
+    private var _selectedTag: Tag? = null
         set(value) {
             field = value
             (selectedTag as MutableLiveData).postValue(value)
         }
 
-    val selectedTag: LiveData<PhotosTagsUtil.Tag> = MutableLiveData(null)
+    val selectedTag: LiveData<Tag> = MutableLiveData(null)
+
+    init {
+        selectedTag.observeForever(this::onTagChanged)
+    }
+
+    override fun onCleared() {
+        selectedTag.removeObserver(this::onTagChanged)
+        super.onCleared()
+    }
+
+    private fun onTagChanged(tag: Tag?) {
+    }
 
     private val tagUtil = PhotosTagsUtil()
         .setOnChangeListener {
@@ -87,15 +100,17 @@ class PhotosViewModel(
                 _selectedTag = it.firstOrNull()
             }
         }
-        .add("POPULAR", false)
-        .add("FOLLOWING", false)
+        .add(Tag.Type.Popular, false)
+        .add(Tag.Type.Following, false)
 
     override val searchQuery: MutableLiveData<String> = MutableLiveData()
 
     override fun onSubmit() {
         val value = searchQuery.value?.trim()
         if (!value.isNullOrEmpty())
-            tagUtil.add(value, true)
+            tagUtil.add(Tag.Type.Custom(value), true) {
+                _selectedTag = it
+            }
 
         _navigation.call { stopEditor() }
     }

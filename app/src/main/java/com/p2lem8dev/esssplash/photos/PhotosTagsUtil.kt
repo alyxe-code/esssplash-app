@@ -6,13 +6,18 @@ class PhotosTagsUtil {
 
     private val tags = mutableListOf<Tag>()
 
-    fun add(text: String, closable: Boolean): PhotosTagsUtil {
+    fun add(
+        type: Tag.Type,
+        closable: Boolean,
+        onTagAdded: ((tag: Tag) -> Unit)? = null
+    ): PhotosTagsUtil {
         val tag = Tag(
             id = UUID.randomUUID().toString(),
-            text = text,
-            closable = closable
+            closable = closable,
+            type = type
         )
         tags.add(tag)
+        onTagAdded?.invoke(tag)
         notifyDataChanged()
         return this
     }
@@ -39,7 +44,13 @@ class PhotosTagsUtil {
 
     class Tag(
         val id: String,
-        val text: String,
-        val closable: Boolean
-    )
+        val closable: Boolean,
+        val type: Type
+    ) {
+        sealed class Type {
+            object Popular : Type()
+            object Following : Type()
+            class Custom(val text: String) : Type()
+        }
+    }
 }
